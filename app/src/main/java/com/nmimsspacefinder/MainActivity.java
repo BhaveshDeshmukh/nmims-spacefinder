@@ -29,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
         facilitiesButton = findViewById(R.id.facilitiesButton);
 
         classroomsButton.setOnClickListener(v ->
-                showMessage("Classroom directory is coming next"));
+                startActivity(new android.content.Intent(
+                        MainActivity.this,
+                        ClassroomActivity.class
+                )));
 
         labsButton.setOnClickListener(v ->
                 showMessage("Laboratory directory is coming next"));
