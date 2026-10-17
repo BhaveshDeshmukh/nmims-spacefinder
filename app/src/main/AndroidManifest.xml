@@ -14,6 +14,15 @@
 
         <activity
             android:name=".ClassroomActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".SpaceDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".LaboratoryActivity"
             android:exported="false" />
 
         <activity

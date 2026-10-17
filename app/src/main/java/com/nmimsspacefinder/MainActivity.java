@@ -1,5 +1,6 @@
 package com.nmimsspacefinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -28,14 +29,21 @@ public class MainActivity extends AppCompatActivity {
         availabilityButton = findViewById(R.id.availabilityButton);
         facilitiesButton = findViewById(R.id.facilitiesButton);
 
-        classroomsButton.setOnClickListener(v ->
-                startActivity(new android.content.Intent(
-                        MainActivity.this,
-                        ClassroomActivity.class
-                )));
+        classroomsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    ClassroomActivity.class
+            );
+            startActivity(intent);
+        });
 
-        labsButton.setOnClickListener(v ->
-                showMessage("Laboratory directory is coming next"));
+        labsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    LaboratoryActivity.class
+            );
+            startActivity(intent);
+        });
 
         availabilityButton.setOnClickListener(v ->
                 showMessage("Room availability is coming next"));
