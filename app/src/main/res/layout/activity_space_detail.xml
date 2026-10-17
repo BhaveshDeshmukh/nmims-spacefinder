@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:minHeight="48dp"
             android:gravity="center_vertical"
+            android:minHeight="48dp"
             android:text="←  Back"
             android:textColor="#9B8568"
             android:textSize="15sp" />
@@ -28,10 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:letterSpacing="0.1"
             android:textColor="#9B8568"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.1" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detailName"
@@ -40,6 +40,15 @@
             android:layout_marginTop="8dp"
             android:textColor="#292821"
             android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detailLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#574B3D"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
         <TextView
@@ -66,14 +75,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BUILDING"
+                android:letterSpacing="0.1"
+                android:text="WING"
                 android:textColor="#9B8568"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1" />
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detailBuilding"
+                android:id="@+id/detailWing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -84,11 +93,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
+                android:letterSpacing="0.1"
                 android:text="FLOOR"
                 android:textColor="#9B8568"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/detailFloor"
@@ -102,14 +111,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:text="LOCATION"
+                android:letterSpacing="0.1"
+                android:text="SIDE"
                 android:textColor="#9B8568"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1" />
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detailLocation"
+                android:id="@+id/detailSide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -120,11 +129,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
+                android:letterSpacing="0.1"
                 android:text="AVAILABILITY"
                 android:textColor="#9B8568"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.1" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/detailAvailability"
@@ -136,10 +145,10 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/detailNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Sample data: only the room name is provided for the project. Other details are shown as not verified until real campus information is added."
             android:textColor="#77746C"
             android:textSize="12sp" />
 

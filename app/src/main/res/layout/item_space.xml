@@ -35,6 +35,14 @@
             android:layout_marginTop="4dp"
             android:textColor="#77746C"
             android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/spaceLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#9B8568"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <TextView

@@ -43,6 +43,7 @@ public class SpaceAdapter extends RecyclerView.Adapter<SpaceAdapter.Holder> {
         final Space space = items.get(position);
         holder.name.setText(space.name);
         holder.type.setText(space.typeLabel);
+        holder.location.setText(space.getLocationSummary());
         holder.badge.setText(space.availability.label);
         holder.badge.setBackgroundResource(space.availability.badgeRes);
         holder.itemView.setOnClickListener(v -> {
@@ -58,12 +59,14 @@ public class SpaceAdapter extends RecyclerView.Adapter<SpaceAdapter.Holder> {
     static class Holder extends RecyclerView.ViewHolder {
         final TextView name;
         final TextView type;
+        final TextView location;
         final TextView badge;
 
         Holder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.spaceName);
             type = itemView.findViewById(R.id.spaceType);
+            location = itemView.findViewById(R.id.spaceLocation);
             badge = itemView.findViewById(R.id.spaceBadge);
         }
     }

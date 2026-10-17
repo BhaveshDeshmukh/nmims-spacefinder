@@ -2,62 +2,68 @@ package com.nmimsspacefinder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
- * Single source of truth for campus spaces.
- * Currently sample data. Later this can be replaced by an API call
- * without changing the screens.
+ * Single access point for space data. Screens never talk to a data source
+ * directly, so switching from local data to Member 2's API only touches
+ * setDataSource().
  */
 public final class SpaceRepository {
 
-    private static final List<Space> CLASSROOMS = new ArrayList<>();
-
-    static {
-        for (int i = 1; i <= 30; i++) {
-            CLASSROOMS.add(new Space(
-                    "lr-" + i, "LR " + i, "Lecture Room",
-                    null, null, null, Space.Availability.UNKNOWN));
-        }
-        CLASSROOMS.add(new Space(
-                "auditorium", "Auditorium Hall", "Campus Space",
-                null, null, null, Space.Availability.UNKNOWN));
-        CLASSROOMS.add(new Space(
-                "atrangi", "Atrangi Workspace", "Campus Space",
-                null, null, null, Space.Availability.UNKNOWN));
-    }
+    private static SpaceDataSource dataSource = new LocalSpaceDataSource();
+    private static List<Space> cache;
 
     private SpaceRepository() {
     }
 
-    public static List<Space> getClassrooms() {
-        return new ArrayList<>(CLASSROOMS);
-    }
-
-    public static Space findById(String id) {
-        if (id == null) return null;
-        for (Space space : CLASSROOMS) {
-            if (space.id.equals(id)) return space;
+    public static synchronized void setDataSource(SpaceDataSource source) {
+        if (source != null) {
+            dataSource = source;
+            cache = null;
         }
-        return null;
     }
 
-    public static List<Space> searchClassrooms(String query) {
-        String q = query == null ? "" : query.trim().toLowerCase(Locale.ROOT);
+    public static synchronized void refresh() {
+        cache = null;
+    }
+
+    private static synchronized List<Space> load() throws SpaceDataException {
+        if (cache == null) {
+            List<Space> loaded;
+            try {
+                loaded = dataSource.loadSpaces();
+            } catch (SpaceDataException e) {
+                throw e;
+            } catch (RuntimeException e) {
+                throw new SpaceDataException("Could not load spaces", e);
+            }
+            if (loaded == null) {
+                throw new SpaceDataException("No data was returned");
+            }
+            cache = new ArrayList<>(loaded);
+        }
+        return cache;
+    }
+
+    /** category == null searches everything. A blank query returns everything. */
+    public static List<Space> search(Space.Category category, String query)
+            throws SpaceDataException {
+        List<String> tokens = Space.tokenize(query);
         List<Space> result = new ArrayList<>();
-        for (Space s : CLASSROOMS) {
-            if (q.isEmpty()
-                    || contains(s.name, q)
-                    || contains(s.typeLabel, q)
-                    || contains(s.building, q)
-                    || contains(s.floor, q)) {
-                result.add(s);
+        for (Space space : load()) {
+            if (category != null && space.category != category) continue;
+            if (tokens.isEmpty() || space.matches(tokens)) {
+                result.add(space);
             }
         }
         return result;
     }
 
-    private static boolean contains(String field, String q) {
-        return field != null && field.toLowerCase(Locale.ROOT).contains(q);
+    public static Space findById(String id) throws SpaceDataException {
+        if (id == null) return null;
+        for (Space space : load()) {
+            if (space.id.equals(id)) return space;
+        }
+        return null;
     }
 }

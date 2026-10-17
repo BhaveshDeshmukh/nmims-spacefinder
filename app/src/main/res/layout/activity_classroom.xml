@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:minHeight="48dp"
         android:gravity="center_vertical"
+        android:minHeight="48dp"
         android:text="←  Back to SpaceFinder"
         android:textColor="#9B8568"
         android:textSize="15sp" />
@@ -23,10 +23,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:letterSpacing="0.12"
         android:text="CAMPUS DIRECTORY"
         android:textColor="#9B8568"
-        android:textSize="11sp"
-        android:letterSpacing="0.12" />
+        android:textSize="11sp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -41,17 +41,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="Lecture rooms and other campus spaces. Names only; building, floor and availability are not verified yet."
+        android:text="Search by room, wing or floor. Rooms without a location are not verified yet."
         android:textColor="#77746C"
         android:textSize="13sp" />
 
     <EditText
-        android:id="@+id/classroomSearch"
+        android:id="@+id/spaceSearch"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginTop="18dp"
         android:background="@drawable/bg_search"
-        android:hint="Search LR, auditorium, building"
+        android:hint="Search LR 10, B Wing, 2nd floor"
         android:importantForAutofill="no"
         android:inputType="text"
         android:paddingStart="15dp"
@@ -77,13 +77,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="24dp"
-        android:text="No matching rooms or spaces found."
+        android:text="No matching rooms found."
         android:textColor="#77746C"
         android:textSize="14sp"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/classroomList"
+        android:id="@+id/spaceList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

@@ -18,11 +18,17 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".SpaceDetailActivity"
-            android:exported="false" />
+            android:name=".LaboratoryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".LaboratoryActivity"
+            android:name=".SearchResultsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".SpaceDetailActivity"
             android:exported="false" />
 
         <activity

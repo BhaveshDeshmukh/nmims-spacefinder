@@ -29,21 +29,11 @@ public class MainActivity extends AppCompatActivity {
         availabilityButton = findViewById(R.id.availabilityButton);
         facilitiesButton = findViewById(R.id.facilitiesButton);
 
-        classroomsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    MainActivity.this,
-                    ClassroomActivity.class
-            );
-            startActivity(intent);
-        });
+        classroomsButton.setOnClickListener(v ->
+                startActivity(new Intent(this, ClassroomActivity.class)));
 
-        labsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    MainActivity.this,
-                    LaboratoryActivity.class
-            );
-            startActivity(intent);
-        });
+        labsButton.setOnClickListener(v ->
+                startActivity(new Intent(this, LaboratoryActivity.class)));
 
         availabilityButton.setOnClickListener(v ->
                 showMessage("Room availability is coming next"));
@@ -56,20 +46,18 @@ public class MainActivity extends AppCompatActivity {
                     && event.getKeyCode() == KeyEvent.KEYCODE_ENTER
                     && event.getAction() == KeyEvent.ACTION_DOWN;
 
-            if (actionId == EditorInfo.IME_ACTION_SEARCH
-                    || submittedByEnter) {
-
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || submittedByEnter) {
                 String query = searchInput.getText().toString().trim();
 
                 if (query.isEmpty()) {
-                    searchInput.setError("Enter a room or facility");
+                    searchInput.setError("Enter a room or laboratory");
                 } else {
-                    showMessage("Search will be implemented next");
+                    Intent intent = new Intent(this, SearchResultsActivity.class);
+                    intent.putExtra(SpaceListActivity.EXTRA_QUERY, query);
+                    startActivity(intent);
                 }
-
                 return true;
             }
-
             return false;
         });
     }
