@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8F6F1"
+    android:padding="22dp">
+
+    <TextView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="←  Back to SpaceFinder"
+        android:textColor="#9B8568"
+        android:textSize="15sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="20dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CAMPUS DIRECTORY"
+        android:textColor="#9B8568"
+        android:textSize="11sp"
+        android:letterSpacing="0.12"
+        android:paddingBottom="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Explore\nlaboratories."
+        android:textColor="#292821"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:paddingBottom="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find the right laboratory for your next practical session."
+        android:textColor="#77746C"
+        android:textSize="15sp"
+        android:paddingBottom="22dp" />
+
+    <EditText
+        android:id="@+id/laboratorySearch"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@drawable/bg_search"
+        android:hint="Search laboratories"
+        android:singleLine="true"
+        android:textSize="14sp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Laboratory directory"
+        android:textColor="#292821"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/laboratoryNotice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Laboratory names and details will appear here once verified campus information is available."
+        android:textColor="#77746C"
+        android:textSize="14sp"
+        android:padding="16dp"
+        android:background="@drawable/bg_card" />
+
+    <TextView
+        android:id="@+id/emptyMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No verified laboratories are available yet."
+        android:textColor="#77746C"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:padding="20dp"
+        android:visibility="gone" />
+
+</LinearLayout>
