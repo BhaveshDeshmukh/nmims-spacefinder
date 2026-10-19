@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F7F3EB"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <Button
+            android:id="@+id/crBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="CR Dashboard"
+            android:textColor="#44382E"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/crRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh" />
+
+    </LinearLayout>
+
+    <!-- Welcome message -->
+    <TextView
+        android:id="@+id/crWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Signed in as Class Representative"
+        android:textColor="#75685B"
+        android:textSize="14sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Search -->
+    <EditText
+        android:id="@+id/crSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search lecture rooms and labs"
+        android:inputType="text"
+        android:singleLine="true"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Status message -->
+    <TextView
+        android:id="@+id/crStatusMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#9B3028"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Result count -->
+    <TextView
+        android:id="@+id/crResultCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0 spaces"
+        android:textColor="#44382E"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Space list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/crList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp" />
+
+    <!-- Empty state -->
+    <TextView
+        android:id="@+id/crEmptyMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No rooms or laboratories found."
+        android:textColor="#75685B"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="gone" />
+
+    <!-- Selected space panel -->
+    <LinearLayout
+        android:id="@+id/crPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card"
+        android:padding="16dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/crSelName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select a space"
+            android:textColor="#44382E"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/crSelLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textColor="#75685B"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/crSelCurrent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Current status: Unknown"
+            android:textColor="#44382E"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/crSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="Select new availability status" />
+
+        <Button
+            android:id="@+id/crUpdateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Status"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+
+    <!-- Logout -->
+    <Button
+        android:id="@+id/crLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

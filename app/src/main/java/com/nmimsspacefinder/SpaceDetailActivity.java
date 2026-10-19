@@ -48,9 +48,14 @@ public class SpaceDetailActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.detailAvailability))
                 .setText(space.availability.label);
 
-        String note = space.hasLocation()
-                ? "Location recorded by the project team. Live availability is not available yet."
+        String locationNote = space.hasLocation()
+                ? "Location recorded by the project team."
                 : "Location not verified yet. It will be added once confirmed.";
-        ((TextView) findViewById(R.id.detailNote)).setText(note);
+        String availabilityNote =
+                space.source == Space.DataSource.BACKEND
+                        ? " Availability as last reported by a Class Representative."
+                        : " Availability has not been reported yet.";
+        ((TextView) findViewById(R.id.detailNote))
+                .setText(locationNote + availabilityNote);
     }
 }

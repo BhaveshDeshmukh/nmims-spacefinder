@@ -314,6 +314,20 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/crLoginLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:minHeight="48dp"
+            android:text="Class Representative login"
+            android:textColor="#9B8568"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:id="@+id/facilitiesButton"
             android:layout_width="match_parent"

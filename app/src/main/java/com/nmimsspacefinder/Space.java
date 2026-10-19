@@ -41,6 +41,7 @@ public class Space {
     public enum Availability {
         AVAILABLE("Available", R.drawable.bg_badge_available),
         OCCUPIED("Occupied", R.drawable.bg_badge_occupied),
+        UNAVAILABLE("Unavailable", R.drawable.bg_badge_unavailable),
         UNKNOWN("Unknown", R.drawable.bg_badge_unknown);
 
         public final String label;
@@ -50,9 +51,18 @@ public class Space {
             this.label = label;
             this.badgeRes = badgeRes;
         }
+
+        /** Unrecognised or missing values become UNKNOWN, never a guess. */
+        public static Availability parse(String value) {
+            if (value == null) return UNKNOWN;
+            for (Availability a : values()) {
+                if (a.name().equalsIgnoreCase(value.trim())) return a;
+            }
+            return UNKNOWN;
+        }
     }
 
-    /** Where the record came from. LOCAL = bundled in the app, BACKEND = Member 2's API. */
+    /** LOCAL = bundled in the app, BACKEND = reported by the server. */
     public enum DataSource { LOCAL, BACKEND }
 
     public static final String NOT_VERIFIED = "Not verified yet";
@@ -60,6 +70,7 @@ public class Space {
 
     public final String id;
     public final String name;
+    public final String aliases;
     public final Category category;
     public final String typeLabel;
     public final Wing wing;        // null = not verified
@@ -76,6 +87,7 @@ public class Space {
                  Availability availability, DataSource source) {
         this.id = id;
         this.name = name;
+        this.aliases = aliases;
         this.category = category;
         this.typeLabel = typeLabel;
         this.wing = wing;
@@ -91,6 +103,12 @@ public class Space {
         if (wing != null) this.allWords.addAll(tokenize(wing.label));
         if (floor != null) this.allWords.addAll(tokenize(floor.label));
         if (side != null) this.allWords.addAll(tokenize(side.label));
+    }
+
+    /** Returns a copy with a different availability. Location is unchanged. */
+    public Space withAvailability(Availability newAvailability, DataSource newSource) {
+        return new Space(id, name, aliases, category, typeLabel,
+                wing, floor, side, newAvailability, newSource);
     }
 
     public boolean hasLocation() {
@@ -117,8 +135,7 @@ public class Space {
 
     /**
      * Every query token must be the start of some word of this space.
-     * Pure-number tokens only match the room name, so "LR 2" does not match
-     * LR 10 just because LR 10 is on the "2nd" floor.
+     * Pure-number tokens only match the room name.
      */
     public boolean matches(List<String> queryTokens) {
         for (String token : queryTokens) {

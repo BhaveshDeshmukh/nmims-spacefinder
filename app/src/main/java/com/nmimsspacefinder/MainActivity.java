@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout labsButton;
     private LinearLayout availabilityButton;
     private LinearLayout facilitiesButton;
+    private TextView crLoginLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         labsButton = findViewById(R.id.labsButton);
         availabilityButton = findViewById(R.id.availabilityButton);
         facilitiesButton = findViewById(R.id.facilitiesButton);
+        crLoginLink = findViewById(R.id.crLoginLink);
 
         classroomsButton.setOnClickListener(v ->
                 startActivity(new Intent(this, ClassroomActivity.class)));
@@ -40,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         facilitiesButton.setOnClickListener(v ->
                 showMessage("Campus facilities are coming next"));
+
+        crLoginLink.setOnClickListener(v ->
+                startActivity(new Intent(this, CRLoginActivity.class)));
 
         searchInput.setOnEditorActionListener((v, actionId, event) -> {
             boolean submittedByEnter = event != null

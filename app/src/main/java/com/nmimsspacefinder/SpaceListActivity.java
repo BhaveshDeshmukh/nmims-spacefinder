@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Shared behaviour for the Classroom, Laboratory and Search screens.
@@ -25,6 +26,7 @@ public abstract class SpaceListActivity extends AppCompatActivity {
 
     private SpaceAdapter adapter;
     private RecyclerView recyclerView;
+    private EditText searchInput;
     private TextView emptyMessage;
     private TextView resultCount;
 
@@ -40,7 +42,7 @@ public abstract class SpaceListActivity extends AppCompatActivity {
 
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
 
-        EditText searchInput = findViewById(R.id.spaceSearch);
+        searchInput = findViewById(R.id.spaceSearch);
         recyclerView = findViewById(R.id.spaceList);
         emptyMessage = findViewById(R.id.emptyMessage);
         resultCount = findViewById(R.id.resultCount);
@@ -73,6 +75,25 @@ public abstract class SpaceListActivity extends AppCompatActivity {
         });
 
         applyFilter(searchInput.getText().toString());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Students only read availability. On failure we keep what we had.
+        ApiClient.fetchAvailability(new ApiClient.Callback<Map<String, Space.Availability>>() {
+            @Override
+            public void onSuccess(Map<String, Space.Availability> result) {
+                if (isFinishing() || isDestroyed()) return;
+                SpaceRepository.setAvailability(result);
+                applyFilter(searchInput.getText().toString());
+            }
+
+            @Override
+            public void onError(ApiException error) {
+                // Keep the last known data; availability stays "Unknown" if never loaded.
+            }
+        });
     }
 
     private void applyFilter(String query) {
