@@ -1,5 +1,6 @@
 package com.nmimsspacefinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -11,49 +12,102 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText searchInput;
-    private LinearLayout classroomsButton;
-    private LinearLayout labsButton;
-    private LinearLayout availabilityButton;
-    private LinearLayout facilitiesButton;
+    EditText searchInput;
+
+    LinearLayout classroomsButton;
+    LinearLayout labsButton;
+    LinearLayout availabilityButton;
+    LinearLayout facilitiesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         searchInput = findViewById(R.id.searchInput);
+
         classroomsButton = findViewById(R.id.classroomsButton);
         labsButton = findViewById(R.id.labsButton);
         availabilityButton = findViewById(R.id.availabilityButton);
         facilitiesButton = findViewById(R.id.facilitiesButton);
 
-        classroomsButton.setOnClickListener(v ->
-                showMessage("Classroom directory is coming next"));
+        // Open classroom directory
+        classroomsButton.setOnClickListener(v -> {
 
-        labsButton.setOnClickListener(v ->
-                showMessage("Laboratory directory is coming next"));
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SpaceDirectoryActivity.class
+            );
 
-        availabilityButton.setOnClickListener(v ->
-                showMessage("Room availability is coming next"));
+            intent.putExtra("TYPE", "CLASSROOM");
 
-        facilitiesButton.setOnClickListener(v ->
-                showMessage("Campus facilities are coming next"));
+            startActivity(intent);
+        });
 
+        // Open laboratory directory
+        labsButton.setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    SpaceDirectoryActivity.class
+            );
+
+            intent.putExtra("TYPE", "LAB");
+
+            startActivity(intent);
+        });
+
+        // Open availability screen
+        availabilityButton.setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    AvailabilityActivity.class
+            );
+
+            startActivity(intent);
+        });
+
+        // Facilities - simple message for now
+        facilitiesButton.setOnClickListener(v -> {
+
+            Toast.makeText(
+                    this,
+                    "Campus facilities will be added later",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
+
+        // Home search
         searchInput.setOnEditorActionListener((v, actionId, event) -> {
-            boolean submittedByEnter = event != null
-                    && event.getKeyCode() == KeyEvent.KEYCODE_ENTER
-                    && event.getAction() == KeyEvent.ACTION_DOWN;
+
+            boolean enterPressed =
+                    event != null
+                            && event.getKeyCode() == KeyEvent.KEYCODE_ENTER
+                            && event.getAction() == KeyEvent.ACTION_DOWN;
 
             if (actionId == EditorInfo.IME_ACTION_SEARCH
-                    || submittedByEnter) {
+                    || enterPressed) {
 
-                String query = searchInput.getText().toString().trim();
+                String query =
+                        searchInput.getText().toString().trim();
 
                 if (query.isEmpty()) {
-                    searchInput.setError("Enter a room or facility");
+
+                    searchInput.setError("Enter a room name");
+
                 } else {
-                    showMessage("Search will be implemented next");
+
+                    Intent intent = new Intent(
+                            MainActivity.this,
+                            SpaceDirectoryActivity.class
+                    );
+
+                    intent.putExtra("TYPE", "SEARCH");
+                    intent.putExtra("QUERY", query);
+
+                    startActivity(intent);
                 }
 
                 return true;
@@ -61,9 +115,5 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         });
-    }
-
-    private void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
